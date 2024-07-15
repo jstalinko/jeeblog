@@ -87,3 +87,45 @@ function asset_header($path) {
             header('Content-Type: text/plain');
     }
 }
+
+/**
+ * Generates a URL for accessing theme assets.
+ *
+ * @param string $theme The name of the theme.
+ * @param string $src The path to the asset within the theme.
+ * @return string The generated URL for the asset.
+ */
+function asset_theme($theme, $src) {
+    // Base URL for the assets script
+    $baseUrl = '/assets/';
+    
+    // Build query string with the theme and src parameters
+    $queryString = http_build_query([
+        'theme' => $theme,
+        'src' => $src
+    ]);
+
+    // Return the complete URL
+    return $baseUrl . '?' . $queryString;
+}
+
+/**
+ * Generates a URL for accessing plugin assets.
+ *
+ * @param string $plugin The name of the plugin.
+ * @param string $src The path to the asset within the plugin.
+ * @return string The generated URL for the asset.
+ */
+function asset_plugin($plugin, $src) {
+    // Base URL for the assets script
+    $baseUrl = '/assets/';
+    
+    // Build query string with the plugin and src parameters
+    $queryString = http_build_query([
+        'plugin' => $plugin,
+        'src' => $src
+    ]);
+
+    // Return the complete URL
+    return $baseUrl . '?' . $queryString;
+}

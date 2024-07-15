@@ -7,7 +7,7 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
 />
-    <link rel="stylesheet" href="/assets/?theme=default&src=css/style.css">
+    <link rel="stylesheet" href="<?=asset_theme('default','css/style.css');?>">
     <title><?= config('name') ;?></title>
 </head>
 <body>
