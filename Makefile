@@ -24,7 +24,7 @@ quotes := "Keep it simple, stupid." \
           "Without requirements or design, programming is the art of adding bugs to an empty text file."
 
 # Select a random quote from the list
-commit_message := $(shell echo $(quotes) | tr ' ' '\n' | shuf -n 1)
+commit_message := $(shell echo ${quotes} | tr ' ' '\n' | shuf -n 1)
 
 commit:
 	@echo "Committing with message: $(commit_message)"
