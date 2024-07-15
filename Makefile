@@ -35,7 +35,7 @@ icons := "🚀" \
          "🚦"
 
 # Select a random commit message and icon
-commit_message := $(shell echo $(commit_messages) | tr ' ' '\n')
+commit_message := $(shell echo $(commit_messages) | tr ' ' '\n' | shuf -n 1)
 icon := $(shell echo $(icons) | tr ' ' '\n' | shuf -n 1)
 
 commit:
