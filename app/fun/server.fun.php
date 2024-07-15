@@ -65,3 +65,35 @@ function request_post_value($key, $default = null)
 {
     return isset($_POST[$key]) ? $_POST[$key] : $default;
 }
+
+
+/**
+ * Reads configuration from jeeblog.json and returns as array.
+ *
+ * @param string|null $key Optional. The key to fetch from config array.
+ *                         If null, prints all config; if defined, returns the value.
+ * @return mixed|null Returns the config value for $key if defined, otherwise null.
+ * @throws Exception Throws exception if jeeblog.json file is not found.
+ */
+function config($key = null) {
+    // Path to your configuration file
+    $configFile = ROOT_PATH.'/jeeblog.json';
+    
+    // Check if the config file exists
+    if (file_exists($configFile)) {
+        // Read the JSON file
+        $config = file_get_contents($configFile);
+        
+        // Parse JSON string to array
+        $configArray = json_decode($config, true);
+        
+        // If $key is null, print all config; otherwise, return the value for the key
+        if ($key === null) {
+            print_r($configArray); // Or you can return $configArray; for printing purposes
+        } else {
+            return isset($configArray[$key]) ? $configArray[$key] : null;
+        }
+    } else {
+        throw new Exception('Config file '.$configFile.' not found.');
+    }
+}

@@ -19,5 +19,6 @@
  */
 
  // "Programming is like sex: one mistake and you have to support it for the rest of your life." — Michael Sinz
+define("JEEBLOG_START",microtime());
 
- require_once __DIR__ .'/app/boot.php';
+require_once __DIR__ .'/app/boot.php';
