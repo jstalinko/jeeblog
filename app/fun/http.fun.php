@@ -107,7 +107,7 @@ function http_get($url, $headers = [])
     if (curl_errno($ch)) {
         $error_msg = curl_error($ch);
         curl_close($ch);
-        throw new Exception("cURL error: $error_msg");
+        throw new Exception("cURL error: $error_msg URL $url");
     }
 
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -235,4 +235,33 @@ function http_delete($url, $headers = [])
         'status_code' => $http_code,
         'response' => $response
     ];
+}
+
+/**
+ * Perform an HTTP REQUEST API using cURL.
+ *
+ * @param string $url The URL to request.
+ * @param array $headers An array of headers to send with the request. Default is an empty array.
+ * @return array An array containing the HTTP status code and the response body.
+ * @throws Exception If there is a cURL error.
+ */
+function http_api($endpoint,$method = 'GET' , $data = [])
+{
+    defined('API_URL') or die("API_URL Not defined");
+    $api = API_URL.'/'.$endpoint;
+    $headers = [
+        'User-Agent: JeeBlog@'.DOMAIN,
+        'X-Request-Domain: '.DOMAIN,
+        'X-Signature: '.sha1(DOMAIN) 
+    ];
+
+    if($method == 'GET')
+    {
+        return http_get($api,$headers);
+    }else if($method == 'POST')
+    {
+        return http_post($api,$data,$headers);
+    }
+
+    return null;
 }

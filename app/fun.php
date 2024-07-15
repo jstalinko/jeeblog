@@ -25,7 +25,8 @@ $fun_allow_auto_register = false;
 $registerFun = [
     'client',
     'http',
-    'server'
+    'server',
+    'common'
 ];
 
 if ($fun_allow_auto_register) {
