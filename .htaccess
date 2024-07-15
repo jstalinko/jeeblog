@@ -1,0 +1,8 @@
+# Deny access to specific files
+<Files "jeeblog.json">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Deny access to empty directories
+Options -Indexes
