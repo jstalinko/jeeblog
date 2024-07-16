@@ -1,4 +1,5 @@
 <?php
+
 /**
  * *************************************************
  * JEEBLOG - create free blog zero configuration
@@ -17,7 +18,8 @@
  * @param string $filePath The path to the JSON file.
  * @return array The decoded JSON data as an associative array.
  */
-function read_json($filePath) {
+function read_json($filePath)
+{
     if (!file_exists($filePath)) {
         return [];
     }
@@ -33,7 +35,8 @@ function read_json($filePath) {
  * @param array $data The associative array to encode and write.
  * @return bool True if the file was written successfully, false otherwise.
  */
-function write_json($filePath, $data) {
+function write_json($filePath, $data)
+{
     $jsonContent = json_encode($data, JSON_PRETTY_PRINT);
     return file_put_contents($filePath, $jsonContent) !== false;
 }
@@ -45,7 +48,8 @@ function write_json($filePath, $data) {
  * @param array $keyValuePairs The associative array of key-value pairs to add.
  * @return bool True if the key-value pairs were added successfully, false otherwise.
  */
-function merge_json($filePath, $keyValuePairs) {
+function merge_json($filePath, $keyValuePairs)
+{
     // Read the existing data from the JSON file
     $data = read_json($filePath);
 
@@ -58,7 +62,8 @@ function merge_json($filePath, $keyValuePairs) {
     return write_json($filePath, $data);
 }
 
-function asset_header($path) {
+function asset_header($path)
+{
     $extension = pathinfo($path, PATHINFO_EXTENSION);
     switch ($extension) {
         case 'css':
@@ -95,10 +100,11 @@ function asset_header($path) {
  * @param string $src The path to the asset within the theme.
  * @return string The generated URL for the asset.
  */
-function asset_theme($theme, $src) {
+function asset_theme($theme, $src)
+{
     // Base URL for the assets script
     $baseUrl = '/assets/';
-    
+
     // Build query string with the theme and src parameters
     $queryString = http_build_query([
         'theme' => $theme,
@@ -116,10 +122,11 @@ function asset_theme($theme, $src) {
  * @param string $src The path to the asset within the plugin.
  * @return string The generated URL for the asset.
  */
-function asset_plugin($plugin, $src) {
+function asset_plugin($plugin, $src)
+{
     // Base URL for the assets script
     $baseUrl = '/assets/';
-    
+
     // Build query string with the plugin and src parameters
     $queryString = http_build_query([
         'plugin' => $plugin,
@@ -128,4 +135,12 @@ function asset_plugin($plugin, $src) {
 
     // Return the complete URL
     return $baseUrl . '?' . $queryString;
+}
+
+function route_dispatch($defaultPath, $state = 'index')
+{
+    $files = $defaultPath.'/'.$state.'.php';
+    if(!file_exists($files)) die("Route not found : " .$files);
+
+    require_once $files;
 }
