@@ -15,3 +15,4 @@ define('APP_PATH', __DIR__);
 define('FUN_PATH', __DIR__ . '/fun');
 define('THEME_PATH', __DIR__ . '/theme');
 define('PLUGIN_PATH', __DIR__ . '/plugin');
+define('DATA_PATH' , __DIR__ . '/data');

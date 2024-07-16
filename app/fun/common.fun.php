@@ -139,6 +139,7 @@ function asset_plugin($plugin, $src)
 
 function route_dispatch($defaultPath, $state = 'index')
 {
+    $state = ($state == '') ? 'index': $state;
     $files = $defaultPath.'/'.$state.'.php';
     if(!file_exists($files)) die("Route not found : " .$files);
 
